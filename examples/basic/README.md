@@ -69,6 +69,12 @@ ephemeral "random_password" pass {
   upper   = true
 }
 
+module "get_valid_sku_for_deployment_region" {
+  source = "../../modules/sku_selector"
+
+  deployment_region = azurerm_resource_group.test.location
+}
+
 module "vmss_replicator" {
   source = "../.."
 
@@ -113,7 +119,7 @@ module "vmss_replicator" {
   }
   os_profile_linux_configuration_admin_password         = ephemeral.random_password.pass.result
   os_profile_linux_configuration_admin_password_version = 1
-  sku_name                                              = "Standard_D2_v2"
+  sku_name                                              = module.get_valid_sku_for_deployment_region.sku
   source_image_reference = {
     publisher = "Canonical"
     offer     = "0001-com-ubuntu-server-jammy"
@@ -227,6 +233,12 @@ No outputs.
 ## Modules
 
 The following Modules are called:
+
+### <a name="module_get_valid_sku_for_deployment_region"></a> [get\_valid\_sku\_for\_deployment\_region](#module\_get\_valid\_sku\_for\_deployment\_region)
+
+Source: ../../modules/sku_selector
+
+Version:
 
 ### <a name="module_vmss_replicator"></a> [vmss\_replicator](#module\_vmss\_replicator)
 
