@@ -6,6 +6,7 @@ exception contains rules if {
   rules = [
       "virtual_machine_scaleset_zonal_support", 
       "virtual_machine_scaleset_enable_automatic_repair",
-      "public_ip_use_standard_sku_and_zone_redundant_ip"
+      "public_ip_use_standard_sku_and_zone_redundant_ip",
+      "virtual_machine_scaleset_orchestration_mode_flexible",
   ]
 }
