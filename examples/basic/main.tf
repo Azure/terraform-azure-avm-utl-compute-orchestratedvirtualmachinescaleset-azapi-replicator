@@ -106,7 +106,7 @@ module "vmss_replicator" {
   }
   os_profile_linux_configuration_admin_password         = ephemeral.random_password.pass.result
   os_profile_linux_configuration_admin_password_version = 1
-  sku_name                                              = "Standard_D1_v2"
+  sku_name                                              = "Standard_D2_v2"
   source_image_reference = {
     publisher = "Canonical"
     offer     = "0001-com-ubuntu-server-jammy"
