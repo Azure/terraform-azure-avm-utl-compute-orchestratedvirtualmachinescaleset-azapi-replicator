@@ -10,7 +10,7 @@ resource "random_string" "name" {
 }
 
 resource "azurerm_resource_group" "test" {
-  location = "eastus"
+  location = "westus"
   name     = "vmss-replicator-${random_integer.number.result}"
 }
 
