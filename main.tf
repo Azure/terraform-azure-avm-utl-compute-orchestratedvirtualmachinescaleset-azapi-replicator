@@ -261,33 +261,25 @@ locals {
               osProfile = merge(
                 {
                   allowExtensionOperations = var.extension_operations_enabled
-                },
-                var.os_profile.linux_configuration != null ? {
-                  computerNamePrefix = local.linux_configuration_computer_name_prefix
-                } : {},
-                var.os_profile.linux_configuration != null ? {
-                  linuxConfiguration = merge(
-                    {
-                      disablePasswordAuthentication = var.os_profile.linux_configuration.disable_password_authentication
-                      provisionVMAgent              = coalesce(var.os_profile.linux_configuration.provision_vm_agent, true)
-                    },
-                    var.os_profile.linux_configuration.admin_ssh_key != null && length(var.os_profile.linux_configuration.admin_ssh_key) > 0 ? {
-                      ssh = {
+                  linuxConfiguration = var.os_profile.linux_configuration != null ? {
+                     disablePasswordAuthentication = var.os_profile.linux_configuration.disable_password_authentication
+                     provisionVMAgent              = coalesce(var.os_profile.linux_configuration.provision_vm_agent, true)
+                     ssh = var.os_profile.linux_configuration.admin_ssh_key != null && length(var.os_profile.linux_configuration.admin_ssh_key) > 0 ? {
                         publicKeys = [
                           for ssh_key in var.os_profile.linux_configuration.admin_ssh_key : {
                             keyData = ssh_key.public_key
                             path    = "/home/${ssh_key.username}/.ssh/authorized_keys"
                           }
                         ]
-                      }
-                    } : {},
-                    {
-                      patchSettings = {
+                      } : null
+                    patchSettings = {
                         assessmentMode = var.os_profile.linux_configuration.patch_assessment_mode
                         patchMode      = var.os_profile.linux_configuration.patch_mode
                       }
-                    }
-                  )
+                  } : null
+                },
+                var.os_profile.linux_configuration != null ? {
+                  computerNamePrefix = local.linux_configuration_computer_name_prefix
                 } : {},
                 var.os_profile.linux_configuration != null ? {
                   adminUsername = var.os_profile.linux_configuration.admin_username
