@@ -25,7 +25,7 @@ provider "azurerm" {
       recover_soft_deleted_key_vaults = true
     }
     virtual_machine_scale_set {
-      force_delete                  = true
+      force_delete = true
     }
   }
 }

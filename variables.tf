@@ -4,6 +4,7 @@
 #   nullable    = false
 # }
 
+
 variable "location" {
   type        = string
   description = "(Required) The Azure location where the Virtual Machine Scale Set should exist. Changing this forces a new resource to be created."
@@ -128,9 +129,9 @@ variable "capacity_reservation_group_id" {
 
 variable "data_base64" {
   type        = string
-  ephemeral   = true
   default     = null
   description = "(Optional) The Base64-Encoded User Data which should be used for this Virtual Machine Scale Set."
+  ephemeral   = true
 
   validation {
     condition     = var.data_base64 == null || can(base64decode(var.data_base64))
@@ -440,9 +441,9 @@ variable "extension_protected_settings" {
     name               = string
     protected_settings = string
   }))
-  ephemeral   = true
   default     = null
   description = "(Optional) Protected settings for extensions. Each object contains extension name and its protected settings JSON."
+  ephemeral   = true
 
   validation {
     condition = var.extension_protected_settings == null || alltrue([
@@ -1287,9 +1288,9 @@ EOT
 # Task #97: os_profile.custom_data - independent ephemeral variable for nested block sensitive field
 variable "os_profile_custom_data" {
   type        = string
-  ephemeral   = true
   default     = null
   description = "(Optional) Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the Virtual Machine. The maximum length of the binary array is 65535 bytes."
+  ephemeral   = true
 
   validation {
     condition     = var.os_profile_custom_data == null || can(base64decode(var.os_profile_custom_data))
@@ -1311,9 +1312,9 @@ variable "os_profile_custom_data_version" {
 # Task #100: os_profile.linux_configuration.admin_password - independent ephemeral variable for nested block sensitive field
 variable "os_profile_linux_configuration_admin_password" {
   type        = string
-  ephemeral   = true
   default     = null
   description = "(Optional) The admin password to be used on the Virtual Machine Scale Set. Changing this forces a new resource to be created."
+  ephemeral   = true
 
   validation {
     condition = (
@@ -1364,9 +1365,9 @@ variable "os_profile_windows_configuration_additional_unattend_content_content" 
     index   = number
     content = string
   }))
-  ephemeral   = true
   default     = null
   description = "(Required for each item) The XML formatted content that is added to the unattend.xml file for the specified path and component. Changing this forces a new resource to be created."
+  ephemeral   = true
 }
 
 variable "os_profile_windows_configuration_additional_unattend_content_content_version" {
@@ -1383,9 +1384,9 @@ variable "os_profile_windows_configuration_additional_unattend_content_content_v
 # Task #114: os_profile.windows_configuration.admin_password - independent ephemeral variable for nested block sensitive field
 variable "os_profile_windows_configuration_admin_password" {
   type        = string
-  ephemeral   = true
   default     = null
   description = "(Required) The Password which should be used for the local-administrator on this Virtual Machine. Changing this forces a new resource to be created."
+  ephemeral   = true
 
   validation {
     condition = (

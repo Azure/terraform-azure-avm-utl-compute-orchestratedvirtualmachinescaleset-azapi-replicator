@@ -54,7 +54,7 @@ resource "azurerm_subnet_nat_gateway_association" "example" {
   subnet_id      = azurerm_subnet.test.id
 }
 
-ephemeral "random_password" pass {
+ephemeral "random_password" "pass" {
   length  = 16
   lower   = true
   numeric = true
